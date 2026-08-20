@@ -1,0 +1,16 @@
+﻿@import "tailwindcss";
+
+@theme {
+  --color-brand-orange: #FF5A00;
+  --color-brand-yellow: #FFC800;
+  --color-brand-dark: #111111;
+  --color-brand-light: #F8F9FA;
+  --font-sans: "Inter", sans-serif;
+}
+
+body {
+  background-color: #ffffff;
+  color: var(--color-brand-dark);
+  margin: 0;
+  overflow-x: hidden;
+}
