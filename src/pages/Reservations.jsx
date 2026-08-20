@@ -20,7 +20,6 @@ export default function Reservations() {
     e.preventDefault();
     setLoading(true);
 
-    // Connecting to your Supabase 'orders' table (or a specific 'reservations' table if you create one)
     const { error } = await supabase
       .from('orders') 
       .insert([

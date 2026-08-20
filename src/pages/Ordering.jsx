@@ -57,9 +57,10 @@ export default function Ordering() {
                 <h4 className="font-bold text-lg">{item.name}</h4>
                 <p className="text-brand-orange font-bold mt-1">₹{item.price}</p>
                 <div className="flex items-center gap-4 mt-3 bg-gray-50 w-fit rounded-full px-3 py-1 border border-gray-200">
-                  <button onClick={() => updateCart(item.id, -1)} className="text-gray-500 hover:text-brand-dark"><Minus size={18}/></button>
+                  {/* MOBILE OPTIMIZATION: Increased hit area with p-2 */}
+                  <button onClick={() => updateCart(item.id, -1)} className="text-gray-500 hover:text-brand-dark p-2 md:p-0"><Minus size={18}/></button>
                   <span className="font-bold w-4 text-center">{cart[item.id] || 0}</span>
-                  <button onClick={() => updateCart(item.id, 1)} className="text-brand-orange"><Plus size={18}/></button>
+                  <button onClick={() => updateCart(item.id, 1)} className="text-brand-orange p-2 md:p-0"><Plus size={18}/></button>
                 </div>
               </div>
             </motion.div>

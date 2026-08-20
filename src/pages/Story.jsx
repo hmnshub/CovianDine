@@ -13,12 +13,12 @@ export default function Story() {
   return (
     <div className="bg-white min-h-screen pt-24 pb-20 px-6 max-w-7xl mx-auto selection:bg-brand-yellow/30">
       
-      {/* Header */}
       <section className="text-center max-w-3xl mx-auto space-y-6 mb-20">
         <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="inline-flex items-center gap-2 bg-brand-light px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest text-brand-orange border border-gray-100">
           <Sparkles size={14} /> The Story of CovianDine
         </motion.div>
-        <h1 className="text-5xl md:text-7xl font-black tracking-tight text-brand-dark leading-tight">
+        {/* MOBILE OPTIMIZATION: Adjusted hero text size */}
+        <h1 className="text-4xl sm:text-5xl md:text-7xl font-black tracking-tight text-brand-dark leading-tight">
           Where Old Irani Heritage Meets <span className="text-brand-orange">Bangalore Tech.</span>
         </h1>
         <p className="text-gray-500 text-lg leading-relaxed font-medium">
@@ -26,7 +26,6 @@ export default function Story() {
         </p>
       </section>
 
-      {/* Hero Visual Collage */}
       <section className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-32">
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="rounded-3xl overflow-hidden h-96 shadow-lg">
           <img src={RESTAURANT_MEDIA.ambience[0].url} alt="Ambience" className="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
@@ -39,7 +38,6 @@ export default function Story() {
         </motion.div>
       </section>
 
-      {/* Dishoom Style Narrative */}
       <section className="grid md:grid-cols-2 gap-16 items-center mb-32 bg-brand-light p-8 md:p-16 rounded-[3rem] border border-gray-100">
         <div className="space-y-6">
           <span className="text-brand-orange font-bold uppercase tracking-wider text-sm">Philosophy of the Plate</span>
@@ -63,7 +61,6 @@ export default function Story() {
         </div>
       </section>
 
-      {/* Timeline of Facts */}
       <section className="mb-32">
         <div className="text-center mb-16">
           <span className="text-brand-orange font-bold uppercase tracking-wider text-sm flex items-center gap-2 justify-center mb-3"><Flame size={16}/> Fifty-Odd Years, In Short</span>
@@ -96,7 +93,6 @@ export default function Story() {
         </div>
       </section>
 
-      {/* Master Chefs Section */}
       <section className="mb-32">
         <div className="text-center mb-16">
           <h2 className="text-4xl font-black mb-4">Our Culinary Custodians</h2>
@@ -116,7 +112,6 @@ export default function Story() {
         </div>
       </section>
 
-      {/* Bangalore Outlets */}
       <section>
         <div className="text-center mb-16">
           <h2 className="text-4xl font-black mb-4">Visit Us in Bangalore</h2>

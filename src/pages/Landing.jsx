@@ -12,7 +12,7 @@ import { RESTAURANT_MEDIA, BANGALORE_OUTLETS, MENU_ITEMS } from '../data/menuDat
 // Counts up from 0 to `value` once it scrolls into view
 function Counter({ value, suffix = '', duration = 1.6 }) {
   const ref = useRef(null);
-  const inView = useInView(ref, { once: true, margin: '-80px' });
+  const inView = useInView(ref, { once: true, margin: '0px' });
   const [display, setDisplay] = useState(0);
 
   useEffect(() => {
@@ -39,8 +39,7 @@ function Counter({ value, suffix = '', duration = 1.6 }) {
   );
 }
 
-// Image that scales/parallaxes as the section scrolls through the viewport —
-// stands in for "video-like" motion without needing a real video asset.
+// Image that scales/parallaxes as the section scrolls through the viewport
 function ZoomParallaxImage({ src, alt, className = '', imgClassName = '', scaleRange = [1.25, 1] }) {
   const ref = useRef(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start end', 'end start'] });
@@ -54,7 +53,7 @@ function ZoomParallaxImage({ src, alt, className = '', imgClassName = '', scaleR
   );
 }
 
-// Card that "unfolds" open (clip-path wipe) as it enters the viewport
+// Card that "unfolds" open as it enters the viewport
 function UnfoldCard({ children, className = '', delay = 0, direction = 'up', onClick }) {
   const variants = {
     hidden: {
@@ -73,7 +72,8 @@ function UnfoldCard({ children, className = '', delay = 0, direction = 'up', onC
     <motion.div
       initial="hidden"
       whileInView="show"
-      viewport={{ once: true, margin: '-60px' }}
+      // FIXED: Margin set to 0px so it triggers properly on small mobile viewports
+      viewport={{ once: true, margin: '0px' }}
       variants={variants}
       className={className}
       onClick={onClick}
@@ -83,7 +83,7 @@ function UnfoldCard({ children, className = '', delay = 0, direction = 'up', onC
   );
 }
 
-/* ---------- Content: facts + testimonials (for the "lengthier" storytelling) ---------- */
+/* ---------- Content: facts + testimonials ---------- */
 
 const FACTS = [
   { value: 1968, suffix: '', label: 'The year our first wood-fired tandoor was lit in a Bangalore back-alley kitchen', isYear: true },
@@ -125,7 +125,7 @@ export default function Landing() {
   return (
     <div className="bg-white min-h-screen font-sans selection:bg-brand-yellow/30 overflow-x-hidden">
 
-      {/* 1. HERO — full-bleed, scroll-zoom */}
+      {/* 1. HERO */}
       <section ref={heroRef} className="relative h-screen min-h-[640px] w-full overflow-hidden">
         <motion.div style={{ scale: heroScale }} className="absolute inset-0">
           <img
@@ -137,9 +137,7 @@ export default function Landing() {
         </motion.div>
 
         <motion.div style={{ opacity: heroOpacity, y: heroTextY }} className="relative z-10 h-full flex flex-col justify-end pb-24 px-6 max-w-7xl mx-auto">
-  
-
-          <motion.h1 initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} className="text-6xl md:text-8xl font-black leading-[0.9] tracking-tighter text-white max-w-4xl">
+          <motion.h1 initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} className="text-5xl sm:text-6xl md:text-8xl font-black leading-[0.9] tracking-tighter text-white max-w-4xl">
             Where Taste Meets <span className="text-brand-orange block mt-2">Perfection.</span>
           </motion.h1>
 
@@ -147,11 +145,11 @@ export default function Landing() {
             Since 1968, Bangalore's finest culinary heritage — now with a seamless, queue-free ordering system built for the way you actually eat out.
           </motion.p>
 
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4 }} className="flex flex-wrap gap-4 mt-10">
-            <button onClick={() => navigate('/reservations')} className="bg-brand-orange text-white px-8 py-4 rounded-2xl font-bold text-lg hover:scale-105 transition-transform flex items-center gap-2 shadow-lg shadow-brand-orange/30">
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4 }} className="flex flex-col sm:flex-row w-full sm:w-auto gap-4 mt-10">
+            <button onClick={() => navigate('/reservations')} className="w-full sm:w-auto justify-center bg-brand-orange text-white px-8 py-4 rounded-2xl font-bold text-lg hover:scale-105 transition-transform flex items-center gap-2 shadow-lg shadow-brand-orange/30">
               Book a Table <ArrowRight size={20} />
             </button>
-            <button onClick={() => navigate('/menu')} className="bg-white/10 backdrop-blur-md border border-white/30 text-white px-8 py-4 rounded-2xl font-bold text-lg hover:bg-white/20 transition-colors">
+            <button onClick={() => navigate('/menu')} className="w-full sm:w-auto justify-center bg-white/10 backdrop-blur-md border border-white/30 text-white px-8 py-4 rounded-2xl font-bold text-lg hover:bg-white/20 transition-colors">
               Explore Menu
             </button>
           </motion.div>
@@ -179,7 +177,7 @@ export default function Landing() {
         </motion.div>
       </div>
 
-      {/* 3. FACTS STRIP — count-up numbers */}
+      {/* 3. FACTS STRIP */}
       <section className="py-20 px-6 bg-white">
         <div className="max-w-6xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-8">
           {FACTS.map((fact, i) => (
@@ -193,17 +191,20 @@ export default function Landing() {
         </div>
       </section>
 
-      {/* 4. OUR STORY — narrative with zoom-parallax image */}
+      {/* 4. OUR STORY */}
       <section className="py-24 px-6 bg-brand-light">
-        <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-16 items-center">
-          <UnfoldCard direction="left" className="order-2 md:order-1">
+        <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 md:gap-16 items-center">
+          {/* FIXED: order-1 on mobile so image appears above the text, added a responsive height */}
+          <UnfoldCard direction="left" className="order-1 md:order-1">
             <ZoomParallaxImage
               src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=1000&auto=format&fit=crop&q=80"
               alt="Open tandoor kitchen"
-              className="rounded-[3rem] h-[520px] shadow-2xl"
+              className="rounded-[3rem] h-[350px] md:h-[520px] shadow-2xl"
             />
           </UnfoldCard>
-          <div className="order-1 md:order-2 space-y-6">
+          
+          {/* FIXED: order-2 so text falls below image on mobile */}
+          <div className="order-2 md:order-2 space-y-6">
             <span className="text-brand-orange font-bold uppercase tracking-wider text-sm flex items-center gap-2">
               <Sparkles size={16} /> Our Story
             </span>
@@ -238,7 +239,7 @@ export default function Landing() {
         </div>
       </section>
 
-      {/* 6. SIGNATURE DISHES — unfold on scroll */}
+      {/* 6. SIGNATURE DISHES */}
       <section className="py-32 px-6 bg-white">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16 space-y-4">
@@ -278,7 +279,7 @@ export default function Landing() {
         </div>
       </section>
 
-      {/* 7. GALLERY — zoom-parallax mosaic */}
+      {/* 7. GALLERY */}
       <section className="py-24 px-6 bg-brand-light">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16 space-y-4">
@@ -413,11 +414,11 @@ export default function Landing() {
         <div className="relative z-10 max-w-3xl mx-auto text-center space-y-8">
           <h2 className="text-4xl md:text-6xl font-black text-white leading-tight">Hungry Yet?</h2>
           <p className="text-white/80 text-xl font-medium">Book a table, or have the 24-hour daal at your door tonight.</p>
-          <div className="flex flex-wrap gap-4 justify-center">
-            <button onClick={() => navigate('/reservations')} className="bg-brand-orange text-white px-8 py-4 rounded-2xl font-bold text-lg hover:scale-105 transition-transform flex items-center gap-2 shadow-lg shadow-brand-orange/40">
+          <div className="flex flex-col sm:flex-row w-full sm:w-auto gap-4 justify-center">
+            <button onClick={() => navigate('/reservations')} className="w-full sm:w-auto justify-center bg-brand-orange text-white px-8 py-4 rounded-2xl font-bold text-lg hover:scale-105 transition-transform flex items-center gap-2 shadow-lg shadow-brand-orange/40">
               Book a Table <ArrowRight size={20} />
             </button>
-            <button onClick={() => navigate('/order?mode=delivery')} className="bg-white text-brand-dark px-8 py-4 rounded-2xl font-bold text-lg hover:bg-gray-100 transition-colors">
+            <button onClick={() => navigate('/order?mode=delivery')} className="w-full sm:w-auto justify-center bg-white text-brand-dark px-8 py-4 rounded-2xl font-bold text-lg hover:bg-gray-100 transition-colors">
               Order Delivery
             </button>
           </div>
