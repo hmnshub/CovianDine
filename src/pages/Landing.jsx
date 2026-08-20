@@ -137,15 +137,7 @@ export default function Landing() {
         </motion.div>
 
         <motion.div style={{ opacity: heroOpacity, y: heroTextY }} className="relative z-10 h-full flex flex-col justify-end pb-24 px-6 max-w-7xl mx-auto">
-  <motion.div 
-    initial={{ opacity: 0, x: -20 }} 
-    animate={{ opacity: 1, x: 0 }} 
-    // Changed bg-white/10 to bg-black/50 and tweaked the border opacity
-    className="inline-flex w-fit items-center gap-2 bg-black/50 backdrop-blur-md px-4 py-2 rounded-full text-sm font-bold border border-white/10 text-white mb-6"
-  >
-    <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse"></span>
-    Accepting Orders in Bangalore
-  </motion.div>
+  
 
           <motion.h1 initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} className="text-6xl md:text-8xl font-black leading-[0.9] tracking-tighter text-white max-w-4xl">
             Where Taste Meets <span className="text-brand-orange block mt-2">Perfection.</span>
